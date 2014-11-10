@@ -1,0 +1,14 @@
+= form_for @reply, :url => replies_path do |f|
+  - if @reply.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@reply.errors.count, "error")} prohibited this announcement from being saved:"
+      %ul
+        - @reply.errors.full_messages.each do |msg|
+          %li= msg
+
+  .field
+    = f.label :content
+    = f.text_area :content
+    = f.hidden_field :announcement_id, :value => @announcement.id
+  .actions
+    = f.submit 'Save'
