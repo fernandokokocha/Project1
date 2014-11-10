@@ -1,11 +1,13 @@
 Rails.application.routes.draw do
 
-  devise_for :users
 	root to: "announcements#index"
-  resources :categories
-  resources :replies
-
   resources :announcements
+  devise_for :users
+	get 'admin' => 'adminpanel'
+	namespace :admin do
+		resources :categories
+		resources :replies
+	end
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

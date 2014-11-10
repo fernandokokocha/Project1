@@ -1,0 +1,21 @@
+%h1 Listing replies
+
+%table
+  %tr
+    %th Announcement
+    %th User
+    %th
+    %th
+    %th
+
+  - @replies.each do |reply|
+    %tr
+      %td= reply.announcement
+      %td= reply.user.email
+      %td= link_to 'Show', admin_reply_path(reply)
+      %td= link_to 'Edit', edit_admin_reply_path(reply)
+      %td= link_to 'Destroy', admin_reply_path(reply), :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New reply', new_admin_reply_path

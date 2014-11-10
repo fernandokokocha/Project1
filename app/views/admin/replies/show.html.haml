@@ -1,0 +1,15 @@
+%p#notice= notice
+
+%p
+  %b Announcement:
+  = @reply.announcement
+  %br
+  %b Created at:
+  = @reply.created_at
+  %br
+  %b User:
+  = @reply.user
+
+= link_to 'Edit', edit_admin_reply_path(@reply)
+\|
+= link_to 'Back', admin_replies_path

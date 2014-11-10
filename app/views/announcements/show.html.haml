@@ -16,8 +16,11 @@
   %h1 Replies:
   - for reply in @announcement.replies
     %p
+      %b= reply.user.email
+      %b (
+      %b= reply.created_at
+      %b ):
       = reply.content
-      = reply.user_id
 
 = render 'reply'
 

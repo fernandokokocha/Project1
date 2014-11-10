@@ -32,6 +32,8 @@ class AnnouncementsController < ApplicationController
 		@categories = Category.all
     @announcement = Announcement.new(announcement_params)
 		@announcement.user = current_user
+    @announcement.done = false
+    @announcement.edited = false
     @announcement.save
     respond_with(@announcement)
   end

@@ -6,4 +6,8 @@ class User < ActiveRecord::Base
 
 	has_many :announcements
 	has_many :replies
+
+  def to_s
+    email
+  end
 end
