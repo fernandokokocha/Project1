@@ -16,11 +16,13 @@
   %h1 Replies:
   - for reply in @announcement.replies
     %p
-      %b= reply.user.email
-      %b (
-      %b= reply.created_at
-      %b ):
+      %b= "%s (%s)" % [reply.user.email, reply.created_at]
+      %br
       = reply.content
+      -if current_user == reply.user
+        %br
+        =link_to 'Edit', edit_admin_reply_path(reply)
+        =link_to 'Destroy', admin_reply_path, :method => :delete, :data => { :confirm => 'Are you sure?' }
 
 = render 'reply'
 

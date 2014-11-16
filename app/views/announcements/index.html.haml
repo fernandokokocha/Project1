@@ -6,19 +6,23 @@
     %th Content
     %th Author
     %th Category
-    %th
+    %th Replies
     %th
     %th
 
   - @announcements.each do |announcement|
     %tr
-      %td= announcement.title
+      %td= link_to announcement.title, announcement
       %td= announcement.content
       %td= announcement.user.email
       %td= announcement.category.name
-      %td= link_to 'Show', announcement
-      %td= link_to 'Edit', edit_announcement_path(announcement)
-      %td= link_to 'Destroy', announcement, :method => :delete, :data => { :confirm => 'Are you sure?' }
+      %td= announcement.replies.count
+      %td
+        -if current_user == announcement.user
+          =link_to 'Edit', edit_announcement_path(announcement)
+      %td
+        -if current_user == announcement.user
+          =link_to 'Destroy', announcement, :method => :delete, :data => { :confirm => 'Are you sure?' }
 
 %br
 
