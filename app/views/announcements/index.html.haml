@@ -3,20 +3,20 @@
 %table
   %tr
     %th Title
-    %th Content
     %th Author
     %th Category
     %th Replies
+    %th
     %th
     %th
 
   - @announcements.each do |announcement|
     %tr
       %td= link_to announcement.title, announcement
-      %td= announcement.content
       %td= announcement.user.email
       %td= announcement.category.name
       %td= announcement.replies.count
+      %td= link_to 'More', announcement
       %td
         -if current_user == announcement.user
           =link_to 'Edit', edit_announcement_path(announcement)
