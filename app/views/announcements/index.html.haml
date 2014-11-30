@@ -1,22 +1,29 @@
-%h1 Listing announcements
+%h1 Current announcements
 
-%table
+%table#main-table
   %tr
     %th Title
     %th Author
     %th Category
     %th Replies
+    %th Done
     %th
     %th
     %th
 
   - @announcements.each do |announcement|
-    %tr
+    %tr{ :class => ('mine-row' if current_user == announcement.user) }
       %td= link_to announcement.title, announcement
       %td= announcement.user.email
       %td= announcement.category.name
       %td= announcement.replies.count
-      %td= link_to 'More', announcement
+      %td
+        -if announcement.done?
+          Yup
+        -else
+          Nope
+      %td
+        %a.preview-link{ :name => announcement.id } Preview
       %td
         -if current_user == announcement.user
           =link_to 'Edit', edit_announcement_path(announcement)

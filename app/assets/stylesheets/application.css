@@ -23,14 +23,15 @@ body {
     display: inline-block;
     background-color: #652D6C;
     width: 100%;
-
+    margin: 0 0 0 0;
 }
 
 #logo-header {
     float: left;
-    font-size: 300%;
+    font-size: 400%;
     color: #ffffff;
     padding: 30px 0px 30px 20px;
+    margin: 0;
 }
 
 #logo-header a:link,
@@ -44,6 +45,7 @@ body {
     font-size: 150%;
     color: #ffffff;
     padding: 30px 50px 30px 20px;
+    margin: 0;
 }
 
 #login-header a:link,
@@ -53,11 +55,33 @@ body {
 }
 
 #topmenu {
-    font-size: 200%;
+    font-size: 150%;
+    margin: 0;
     padding: 30px 0px 30px 20px;
 }
 
 #content {
     font-size: 100%;
     padding: 10px 0px 10px 50px;
+    margin: 0;
+}
+
+#main-table {
+    border: solid;
+    background-color: #c0d4ee;
+}
+
+.mine-row {
+    background: #C0FF3E;
+}
+
+.preview-row {
+    background-color: #ff99ff;
+    border: 2px solid purple;
+}
+
+.preview-link {
+    display: block;
+    width: 100%;
+    background: yellow;
 }

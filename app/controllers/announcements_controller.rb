@@ -11,7 +11,11 @@ class AnnouncementsController < ApplicationController
   def show
 		@reply = Reply.new
 		@ann_id = @announcement.id
-    respond_with(@announcement)
+
+    respond_to do |format|
+      format.html
+      format.json { render json: @announcement }
+    end
   end
 
   def new
@@ -41,14 +45,29 @@ class AnnouncementsController < ApplicationController
   def update
 		authenticate_user!
 		@categories = Category.all
-    @announcement.update(announcement_params)
-    respond_with(@announcement)
+    respond_to do |format|
+      if @announcement.update(announcement_params)
+        format.html { redirect_to announcement_path(:id => @announcement.id), notice: 'Announcement was successfully updated.' }
+        format.json { render :show, status: :ok, location: @announcement }
+      else
+        format.html { render :edit }
+        format.json { render json: @announcement.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
   def destroy
 		authenticate_user!
     @announcement.destroy
     respond_with(@announcement)
+  end
+
+  def get_content
+
+
+    respond_to do |format|
+      format.js
+    end
   end
 
   private
