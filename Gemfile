@@ -39,3 +39,4 @@ gem 'spring',        group: :development
 # gem 'debugger', group: [:development, :test]
 gem 'haml-rails'
 gem 'devise'
+gem 'virtus', '~> 1.0.3'

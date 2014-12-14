@@ -20,10 +20,8 @@ class AnnouncementsController < ApplicationController
 
   def new
 		authenticate_user!
-		@reply = Reply.new
     @announcement = Announcement.new
 		@categories = Category.all
-    respond_with(@announcement)
   end
 
   def edit
@@ -34,12 +32,18 @@ class AnnouncementsController < ApplicationController
   def create
 		authenticate_user!
 		@categories = Category.all
-    @announcement = Announcement.new(announcement_params)
-		@announcement.user = current_user
-    @announcement.done = false
+    @announcement = CreateAnnouncement.new(announcement_params)
     @announcement.edited = false
-    @announcement.save
-    respond_with(@announcement)
+    @announcement.done = false
+    @announcement.user_id = current_user.id
+    @persisted = @announcement.save
+    respond_to do |format|
+      if @persisted
+        format.html { redirect_to announcement_path(:id => @persisted), notice: 'Announcement was successfully created.' }
+      else
+        format.html { redirect_to new_announcement_path, notice: 'Announcement was successfully created.' }
+      end
+    end
   end
 
   def update
@@ -63,8 +67,6 @@ class AnnouncementsController < ApplicationController
   end
 
   def get_content
-
-
     respond_to do |format|
       format.js
     end
@@ -76,6 +78,6 @@ class AnnouncementsController < ApplicationController
     end
 
     def announcement_params
-      params.require(:announcement).permit(:title, :content, :user_id, :category_id)
+      params.require(:announcement).permit(:title, :content, :user_id, :category_id, :done, :edited)
     end
 end
