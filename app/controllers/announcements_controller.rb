@@ -41,7 +41,7 @@ class AnnouncementsController < ApplicationController
       if @persisted
         format.html { redirect_to announcement_path(:id => @persisted), notice: 'Announcement was successfully created.' }
       else
-        format.html { redirect_to new_announcement_path, notice: 'Announcement was successfully created.' }
+        format.html { redirect_to new_announcement_path }
       end
     end
   end
