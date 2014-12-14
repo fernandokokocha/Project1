@@ -33,10 +33,7 @@ class AnnouncementsController < ApplicationController
 		authenticate_user!
 		@categories = Category.all
     @announcement = CreateAnnouncement.new(announcement_params)
-    @announcement.edited = false
-    @announcement.done = false
-    @announcement.user_id = current_user.id
-    @persisted = @announcement.save
+    @persisted = create_announcement_service.call(@announcement, current_user)
     respond_to do |format|
       if @persisted
         format.html { redirect_to announcement_path(:id => @persisted), notice: 'Announcement was successfully created.' }
@@ -78,6 +75,10 @@ class AnnouncementsController < ApplicationController
     end
 
     def announcement_params
-      params.require(:announcement).permit(:title, :content, :user_id, :category_id, :done, :edited)
+      params.require(:announcement).permit(:title, :content, :category_id)
+    end
+
+    def create_announcement_service
+      @create_announcement_service ||= CreateAnnouncementService.new
     end
 end
